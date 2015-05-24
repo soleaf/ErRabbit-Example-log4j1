@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+    <!-- Console view -->
+    <appender name="console" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d [%t] %p - %C{1}.%M(%L) | %m%n"/>
+        </layout>
+    </appender>
+
+    <appender name="errabbit" class="org.mintcode.errabbit.log4j.Log4jAppender">
+        <param name="host" value="tcp://localhost:61616"/>
+        <param name="rabbitID" value="example"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%5p [%d{HH:mm:ss}] %m%n"/>
+        </layout>
+    </appender>
+
+    <logger name="org.mintcode.errabbit.example">
+        <level value="ERROR"/>
+        <appender-ref ref="errabbit"/>
+    </logger>
+
+    <!-- Root Logger -->
+    <root>
+        <priority value="INFO" />
+        <appender-ref ref="console" />
+    </root>
+
+
+</log4j:configuration>
